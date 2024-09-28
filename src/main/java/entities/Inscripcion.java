@@ -3,7 +3,6 @@ package entities;
 import lombok.Getter;
 import lombok.Setter;
 import jakarta.persistence.*;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
@@ -12,42 +11,44 @@ import java.time.Period;
 @Getter
 @Setter
 @Table(name = "inscripcion")
-public class Inscripcion  implements Serializable {
+@IdClass(InscripcionId.class)
+@NamedQuery(name = Inscripcion.CARRERASSORTCANTINSC , query = "SELECT i.carrera , count(i) as cant_inscriptos FROM Inscripcion i GROUP BY i.carrera.nombre " +
+        "ORDER BY cant_inscriptos")
+public class Inscripcion implements Serializable {
+    public final static String CARRERASSORTCANTINSC = "Inscripcion.CarrerasSortCantInsc";
 
-    @EmbeddedId
-    private InscripcionId inscripcionId;
+    @Id
+    @Column(name = "id_carrera")
+    private int idCarrera; // Debe ser el tipo de la clave primaria de Carrera (Long o el tipo que uses)
+
+    @Id
+    @Column(name = "nro_libreta")
+    private int nroLibreta;  // Debe ser el tipo de la clave primaria de Alumno (Long o el tipo que uses)
 
     @ManyToOne
-    @MapsId("alumnoId")
-    @JoinColumns({
-            @JoinColumn(name = "dniAlumno", referencedColumnName = "dni"),
-            @JoinColumn(name = "nroLibreta", referencedColumnName = "nro_libreta")
-    })
-    private Alumno alumno;
-
-    @ManyToOne
-    @MapsId("idCarrera")
-    @JoinColumn(name = "idCarrera", referencedColumnName = "id_carrera")
+    @JoinColumn(name = "id_carrera", insertable = false, updatable = false)
     private Carrera carrera;
 
-    @Column
-    private LocalDate fecha_inscripcion;
+    @ManyToOne
+    @JoinColumn(name = "nro_libreta", insertable = false, updatable = false)
+    private Alumno alumno;
 
-    @Column
+    @Column(name = "fecha_inscripcion")
+    private LocalDate fechaInscripcion;
+
+    @Column(name = "se_graduo")
     private boolean seGraduo;
 
-    public Inscripcion() {
-
-    }
+    public Inscripcion() {}
 
     public String getAntiguedad() {
-        return Period.between(fecha_inscripcion, LocalDate.now()).toString();
+        Period antiguedad = Period.between(fechaInscripcion, LocalDate.now());
+        return antiguedad.getYears() + " años, " + antiguedad.getMonths() + " meses";
     }
 
-    public Inscripcion( InscripcionId id ,Alumno alumno, Carrera carrera, LocalDate fecha_inscripcion) {
-        this.inscripcionId = id;
-        this.alumno = alumno;
-        this.carrera = carrera;
-        this.fecha_inscripcion = fecha_inscripcion;
+    public Inscripcion(Alumno alumno, Carrera carrera, LocalDate fechaInscripcion) {
+        this.nroLibreta = alumno.getNro_libreta(); // Suponiendo que `nro_libreta` es la PK de Alumno
+        this.idCarrera = carrera.getId_carrera(); // Suponiendo que `id_carrera` es la PK de Carrera
+        this.fechaInscripcion = fechaInscripcion;
     }
 }
