@@ -4,8 +4,8 @@ import DTOs.AlumnoDTO;
 import DTOs.AlumnoMapper;
 import entities.Alumno;
 import entities.Carrera;
-import repositorios.RepositorioCarrera;
 import repositorios.RepositorioAlumno;
+import repositorios.RepositorioCarrera;
 
 import java.util.List;
 
@@ -38,7 +38,6 @@ public class ServicioAlumno {
         modificado.setCiudad_residencia(alumno.getCiudad_residencia());
 
         repositorioAlumno.modificarAlumno(modificado);
-
     }
 
     public List<AlumnoDTO> listarAlumnos() {

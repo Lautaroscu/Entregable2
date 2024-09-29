@@ -2,7 +2,6 @@ package entities;
 
 import jakarta.persistence.Embeddable;
 
-
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -12,8 +11,6 @@ public class AlumnoId implements Serializable {
 
     private int dni;
     private int nro_libreta;
-
-    // Getters, Setters, hashCode, equals
 
     public AlumnoId() {
     }
@@ -35,6 +32,7 @@ public class AlumnoId implements Serializable {
     public int hashCode() {
         return Objects.hash(dni, nro_libreta);
     }
+
     public int getDni() {
         return dni;
     }

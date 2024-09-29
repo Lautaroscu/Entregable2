@@ -2,7 +2,6 @@ package repositorios;
 
 import entities.Alumno;
 import entities.Carrera;
-
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 

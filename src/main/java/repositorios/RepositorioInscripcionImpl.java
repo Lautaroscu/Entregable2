@@ -9,7 +9,7 @@ import jakarta.persistence.Query;
 import java.time.LocalDate;
 import java.util.List;
 
-public class RepositorioInscripcionImpl extends BaseRepository implements RepositorioInscripcion{
+public class RepositorioInscripcionImpl extends BaseRepository implements RepositorioInscripcion {
 
     public RepositorioInscripcionImpl(EntityManager em) {
         super.em = em;
@@ -23,14 +23,14 @@ public class RepositorioInscripcionImpl extends BaseRepository implements Reposi
 
     @Override
     public void agregarInscripcion(Inscripcion inscripcion) {
-        if(inscripcion != null) {
+        if (inscripcion != null) {
             em.persist(inscripcion);
         }
     }
 
     @Override
     public void modificarInscripcion(Inscripcion inscripcion) {
-        if(inscripcion != null) {
+        if (inscripcion != null) {
             em.merge(inscripcion);
         }
     }
@@ -38,7 +38,7 @@ public class RepositorioInscripcionImpl extends BaseRepository implements Reposi
     @Override
     public void eliminarInscripcion(int id) {
         Inscripcion i = obtenerInscripcion(id);
-        if(i != null) {
+        if (i != null) {
             em.remove(i);
         }
     }

@@ -1,11 +1,9 @@
 package entities;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
-
-import jakarta.persistence.*;
 
 @Entity
 @Getter

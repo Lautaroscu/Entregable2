@@ -47,5 +47,4 @@ public class RepositorioCarreraImpl extends BaseRepository implements Repositori
         return em.createNamedQuery("Carrera.ReporteInscriptosEgresados", CarreraReporteDTO.class)
                 .getResultList();
     }
-
 }

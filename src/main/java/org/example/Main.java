@@ -2,17 +2,19 @@ package org.example;
 
 import DTOs.AlumnoDTO;
 import DTOs.AlumnoMapper;
-import entities.*;
+import entities.Alumno;
+import entities.Carrera;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-import repositorios.*;
+import repositorios.FactoryRepositorios;
+import repositorios.RepositorioAlumnoImpl;
+import repositorios.RepositorioCarreraImpl;
+import repositorios.RepositorioInscripcionImpl;
 import services.ServicioAlumno;
 import services.ServicioCarrera;
 import services.ServicioInscripcion;
 
-
-import java.time.LocalDate;
 import java.util.List;
 
 public class Main {
@@ -64,7 +66,7 @@ public class Main {
             servicioAlumnos.altaAlumno(alumnoDTO5);
 
             List<AlumnoDTO> alumnosFromDB = servicioAlumnos.listarAlumnos();
-            for(AlumnoDTO alumnoFromDb : alumnosFromDB){
+            for (AlumnoDTO alumnoFromDb : alumnosFromDB) {
                 System.out.println(alumnoFromDb.getNombre());
             }
 

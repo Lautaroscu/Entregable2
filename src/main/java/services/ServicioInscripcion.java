@@ -48,7 +48,7 @@ public class ServicioInscripcion {
     public List<CarreraDTO> obtenerCarrerasPorCantInscriptos() {
         List<Carrera> carreras = repositorioInscripcion.recuperarCarrerasSortByCantInscp();
         List<CarreraDTO> carrerasDTO = new ArrayList<>();
-        for(Carrera c : carreras) {
+        for (Carrera c : carreras) {
             carrerasDTO.add(carreraMapper.apply(c));
         }
 
