@@ -1,51 +1,32 @@
 package repositorios;
 
-import DTOs.AlumnoDTO;
-import DTOs.AlumnoMapper;
 import entities.Alumno;
 import entities.Carrera;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 
 import java.util.List;
 
-public class RepositorioAlumnoImpl implements RepositorioAlumno {
-private EntityManager em;
-    private  static  RepositorioAlumnoImpl instance;
+public class RepositorioAlumnoImpl extends BaseRepository implements RepositorioAlumno {
 
-    private RepositorioAlumnoImpl() {
-    }
-
-    public void setEm(EntityManager em) {
-        this.em = em;
-    }
-
-    public EntityManager getEm() {
-        return em;
-    }
-
-    public static RepositorioAlumnoImpl getInstance() {
-        if (instance == null) {
-            instance = new RepositorioAlumnoImpl();
-        }
-        return instance;
+    public RepositorioAlumnoImpl(EntityManager em) {
+        super.em = em;
     }
 
     @Override
     public void altaAlumno(Alumno alumno) {
-        if(alumno != null)
+        if (alumno != null)
             em.persist(alumno);
     }
 
     @Override
     public void bajaAlumno(int nroLibreta) {
-      Alumno a =  this.recuperarAlumnoPorNroLib(nroLibreta);
-     if(a != null)
-         em.remove(a);
-         else
-          throw new IllegalArgumentException("El alumno no existe");
+        Alumno a = this.recuperarAlumnoPorNroLib(nroLibreta);
+        if (a != null)
+            em.remove(a);
+        else
+            throw new IllegalArgumentException("El alumno no existe");
     }
 
     @Override
@@ -56,7 +37,6 @@ private EntityManager em;
         em.merge(alumno);
     }
 
-
     @Override
     public List<Alumno> listarAlumnos() {
         return em.createNamedQuery(Alumno.LISTARALUMNOS, Alumno.class).getResultList();
@@ -64,7 +44,7 @@ private EntityManager em;
 
     @Override
     public List<Alumno> recuperarAlumnosSortByNroLib() {
-        return  em.createNamedQuery(Alumno.ALUMNOSSORTNROLIB , Alumno.class).getResultList();
+        return em.createNamedQuery(Alumno.ALUMNOSSORTNROLIB, Alumno.class).getResultList();
     }
 
     @Override
@@ -79,10 +59,9 @@ private EntityManager em;
         return q.getResultList();
     }
 
-
     @Override
     public List<Alumno> recuperarAlumnosPorCarrerayCiudad(Carrera carrera, String ciudad) {
-        TypedQuery<Alumno> q =  em.createNamedQuery(Alumno.ALUMNOCARRERAYCIUDAD , Alumno.class);
+        TypedQuery<Alumno> q = em.createNamedQuery(Alumno.ALUMNOCARRERAYCIUDAD, Alumno.class);
         q.setParameter("ciudad", ciudad);
         q.setParameter("carrera", carrera);
         return q.getResultList();

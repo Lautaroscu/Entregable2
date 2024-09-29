@@ -21,6 +21,17 @@
             <version>42.6.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derby</artifactId>
+            <version>10.17.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derbytools</artifactId>
+            <version>10.17.1.0</version>
+        </dependency>
+
         <!-- Dependencia para Hibernate Core -->
         <dependency>
             <groupId>org.hibernate.orm</groupId>

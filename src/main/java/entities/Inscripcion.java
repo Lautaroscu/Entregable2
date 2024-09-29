@@ -50,5 +50,6 @@ public class Inscripcion implements Serializable {
         this.nroLibreta = alumno.getNro_libreta(); // Suponiendo que `nro_libreta` es la PK de Alumno
         this.idCarrera = carrera.getId_carrera(); // Suponiendo que `id_carrera` es la PK de Carrera
         this.fechaInscripcion = fechaInscripcion;
+        this.seGraduo = false;
     }
 }
