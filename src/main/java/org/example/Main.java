@@ -24,7 +24,6 @@ public class Main {
         RepositorioInscripcionImpl repoInscripciones = FactoryRepositorios.getRepositorioInscripcion(em);
         RepositorioCarreraImpl repoCarreras = FactoryRepositorios.getRepositorioCarrera(em);
 
-
         ServicioAlumno servicioAlumnos = new ServicioAlumno(repoAlumnos, repoCarreras);
         ServicioCarrera servicioCarrera = new ServicioCarrera(repoCarreras);
         ServicioInscripcion servicioInscripcion = new ServicioInscripcion(repoInscripciones);

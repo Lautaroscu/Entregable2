@@ -1,5 +1,6 @@
 package repositorios;
 
+import DTOs.CarreraReporteDTO;
 import entities.Carrera;
 import jakarta.persistence.EntityManager;
 
@@ -13,4 +14,6 @@ public interface RepositorioCarrera {
     public void removerCarrera(int id);
 
     public void modificarCarrera(Carrera carrera);
+
+    public List<CarreraReporteDTO> obtenerReporteInscriptosEgresados();
 }

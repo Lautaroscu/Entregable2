@@ -6,8 +6,6 @@ import entities.Alumno;
 import entities.Carrera;
 import repositorios.RepositorioCarrera;
 import repositorios.RepositorioAlumno;
-import repositorios.RepositorioAlumnoImpl;
-import repositorios.RepositorioCarreraImpl;
 
 import java.util.List;
 

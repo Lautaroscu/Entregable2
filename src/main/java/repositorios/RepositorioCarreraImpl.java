@@ -1,9 +1,12 @@
 package repositorios;
 
+import DTOs.CarreraReporteDTO;
 import entities.Carrera;
 import jakarta.persistence.EntityManager;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -38,4 +41,11 @@ public class RepositorioCarreraImpl extends BaseRepository implements Repositori
             em.merge(carrera);
         }
     }
+
+    @Override
+    public List<CarreraReporteDTO> obtenerReporteInscriptosEgresados() {
+        return em.createNamedQuery("Carrera.ReporteInscriptosEgresados", CarreraReporteDTO.class)
+                .getResultList();
+    }
+
 }

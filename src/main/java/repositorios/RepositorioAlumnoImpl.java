@@ -59,7 +59,6 @@ public class RepositorioAlumnoImpl extends BaseRepository implements Repositorio
         return q.getResultList();
     }
 
-
     @Override
     public List<Alumno> recuperarAlumnosPorCarrerayCiudad(Carrera carrera, String ciudad) {
         TypedQuery<Alumno> q = em.createNamedQuery(Alumno.ALUMNOCARRERAYCIUDAD, Alumno.class);

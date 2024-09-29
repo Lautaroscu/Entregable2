@@ -2,8 +2,11 @@ package services;
 
 import DTOs.CarreraDTO;
 import DTOs.CarreraMapper;
+import DTOs.CarreraReporteDTO;
 import entities.Carrera;
 import repositorios.RepositorioCarrera;
+
+import java.util.List;
 
 public class ServicioCarrera {
 
@@ -33,6 +36,10 @@ public class ServicioCarrera {
     public void modificarCarrera(CarreraDTO carrera) {
         Carrera c = transformarDtoAEntidad(carrera);
         repositorioCarrera.modificarCarrera(c);
+    }
+
+    public List<CarreraReporteDTO> generarReporteInscriptosEgresados() {
+        return repositorioCarrera.obtenerReporteInscriptosEgresados();
     }
 
     private Carrera transformarDtoAEntidad(CarreraDTO carreraDTO) {
