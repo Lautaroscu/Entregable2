@@ -4,9 +4,11 @@ import entities.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-import repositorios.RepositorioAlumno;
-import repositorios.RepositorioAlumnoImpl;
+import repositorios.*;
+import repositorios.enums.Repositorios;
 import services.ServicioAlumno;
+import services.ServicioCarrera;
+import services.ServicioInscripcion;
 
 
 import java.time.LocalDate;
@@ -16,15 +18,22 @@ public class Main {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("TP");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        ServicioAlumno sa = new ServicioAlumno(em);
 
-    System.out.println();
+        //Instancias singleton repositorios
+        RepositorioAlumnoImpl repoAlumnos =  FactoryRepositorios.getRepositorioAlumno(em);
+        RepositorioInscripcionImpl repoInscripciones = FactoryRepositorios.getRepositorioInscripcion(em);
+        RepositorioCarreraImpl repoCarreras = FactoryRepositorios.getRepositorioCarrera(em);
 
+
+        ServicioAlumno servicioAlumnos = new ServicioAlumno(repoAlumnos, repoCarreras);
+        ServicioCarrera servicioCarrera = new ServicioCarrera(repoCarreras);
+        ServicioInscripcion servicioInscripcion = new ServicioInscripcion(repoInscripciones);
+
+        System.out.println();
 
         em.getTransaction().commit();
 
         em.close();
         emf.close();
-
     }
 }

@@ -19,8 +19,11 @@ public class Carrera {
 
     @Column
     private String nombre;
-public Carrera() {}
+
+    public Carrera() {
+    }
+
     public Carrera(String nombre) {
-    this.nombre = nombre;
+        this.nombre = nombre;
     }
 }

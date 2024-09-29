@@ -5,21 +5,37 @@ import jakarta.persistence.EntityManager;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
 @Getter
 @Setter
-public class RepositorioCarreraImpl  implements  RepositorioCarrera{
-    private EntityManager em;
-    private static RepositorioCarreraImpl instance;
-    private RepositorioCarreraImpl() {}
+public class RepositorioCarreraImpl extends BaseRepository implements RepositorioCarrera {
+
+    public RepositorioCarreraImpl(EntityManager em) {
+        super.em = em;
+    }
+
     @Override
     public Carrera recuperarCarrera(int id) {
-    return null;
+        Carrera c = em.find(Carrera.class, id);
+        return c;
     }
-    public synchronized static RepositorioCarreraImpl getInstance() {
-        if (instance == null) {
-            instance = new RepositorioCarreraImpl();
+
+    @Override
+    public void adicionarCarrera(Carrera carrera) {
+        em.persist(carrera);
+    }
+
+    @Override
+    public void removerCarrera(int id) {
+        Carrera carrera = recuperarCarrera(id);
+        if (carrera != null) {
+            em.remove(carrera);
         }
-        return instance;
+    }
+
+    @Override
+    public void modificarCarrera(Carrera carrera) {
+        if (em.contains(carrera)) {
+            em.merge(carrera);
+        }
     }
 }
