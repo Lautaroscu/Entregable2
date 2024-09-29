@@ -2,8 +2,6 @@ package repositorios;
 
 import jakarta.persistence.EntityManager;
 
-import repositorios.enums.Repositorios;
-
 public class FactoryRepositorios {
     private static RepositorioAlumnoImpl repositorioAlumno;
     private static RepositorioInscripcionImpl repositorioInscripcion;

@@ -7,7 +7,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import repositorios.*;
-import repositorios.enums.Repositorios;
 import services.ServicioAlumno;
 import services.ServicioCarrera;
 import services.ServicioInscripcion;
