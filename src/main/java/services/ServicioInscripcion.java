@@ -1,6 +1,8 @@
 package services;
 
-import DTOs.*;
+import DTOs.AlumnoDTO;
+import DTOs.CarreraDTO;
+import DTOs.InscripcionDTO;
 import entities.Alumno;
 import entities.Carrera;
 import entities.Inscripcion;

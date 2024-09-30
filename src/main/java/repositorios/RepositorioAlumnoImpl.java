@@ -15,7 +15,7 @@ public class RepositorioAlumnoImpl extends BaseRepository implements Repositorio
 
     @Override
     public void altaAlumno(Alumno alumno) {
-        if (alumno != null){
+        if (alumno != null) {
             em.persist(alumno);
         }
     }

@@ -57,7 +57,7 @@ public class Inscripcion implements Serializable {
         this.seGraduo = false;
     }
 
-    public Inscripcion (InscripcionDTO inscripcionDTO) {
+    public Inscripcion(InscripcionDTO inscripcionDTO) {
         this.nroLibreta = inscripcionDTO.getNroLibreta();
         this.idCarrera = inscripcionDTO.getIdCarrera();
         this.fechaInscripcion = inscripcionDTO.getFechaInscripcion();
