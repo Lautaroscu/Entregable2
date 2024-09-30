@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Mon Sep 30 01:23:38 GMT-03:00 2024:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.17.1.0 - (1913217): instance a816c00e-0192-412b-6e1c-00000f638c90 
+on database directory /Users/hilario.eyler/IdeaProjects/Entregable2/MyDerbyDB with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@5a07e868 
+Loaded from file:/Users/hilario.eyler/.m2/repository/org/apache/derby/derby/10.17.1.0/derby-10.17.1.0.jar
+java.vendor=Oracle Corporation
+java.runtime.version=23+37-2369
+user.dir=/Users/hilario.eyler/IdeaProjects/Entregable2
+os.name=Mac OS X
+os.arch=aarch64
+os.version=14.7
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''

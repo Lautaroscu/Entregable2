@@ -1,7 +1,7 @@
 package services;
 
 import DTOs.CarreraDTO;
-import DTOs.CarreraMapper;
+import mappers.CarreraMapper;
 import DTOs.CarreraReporteDTO;
 import entities.Carrera;
 import repositorios.RepositorioCarrera;

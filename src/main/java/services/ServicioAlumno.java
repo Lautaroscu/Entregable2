@@ -1,9 +1,9 @@
 package services;
 
 import DTOs.AlumnoDTO;
-import DTOs.AlumnoMapper;
 import entities.Alumno;
 import entities.Carrera;
+import mappers.AlumnoMapper;
 import repositorios.RepositorioAlumno;
 import repositorios.RepositorioCarrera;
 
@@ -21,8 +21,8 @@ public class ServicioAlumno {
     }
 
     public void altaAlumno(AlumnoDTO alumno) {
-        Alumno nuevo = new Alumno(alumno.getNombre(), alumno.getApellido(), alumno.getEdad(), alumno.getGenero(), alumno.getCiudad_residencia());
-        repositorioAlumno.altaAlumno(nuevo);
+
+        repositorioAlumno.altaAlumno(alumnoMapper.toEntity(alumno));
     }
 
     public void bajaAlumno(int nroLibreta) {

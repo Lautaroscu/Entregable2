@@ -1,5 +1,6 @@
 package entities;
 
+import DTOs.InscripcionDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -49,11 +50,18 @@ public class Inscripcion implements Serializable {
     public Inscripcion() {
     }
 
-    public Inscripcion(Alumno alumno, Carrera carrera, LocalDate fechaInscripcion) {
+    public Inscripcion(Alumno alumno, Carrera carrera) {
         this.nroLibreta = alumno.getNro_libreta();
         this.idCarrera = carrera.getId_carrera();
-        this.fechaInscripcion = fechaInscripcion;
+        this.fechaInscripcion = LocalDate.now();
         this.seGraduo = false;
+    }
+
+    public Inscripcion (InscripcionDTO inscripcionDTO) {
+        this.nroLibreta = inscripcionDTO.getNroLibreta();
+        this.idCarrera = inscripcionDTO.getIdCarrera();
+        this.fechaInscripcion = inscripcionDTO.getFechaInscripcion();
+        this.seGraduo = inscripcionDTO.isSeGraduo();
     }
 
     public String getAntiguedad() {

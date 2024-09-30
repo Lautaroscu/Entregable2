@@ -1,5 +1,6 @@
 package entities;
 
+import DTOs.AlumnoDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,7 +29,7 @@ import lombok.ToString;
                 "(SELECT i.alumno FROM Inscripcion i WHERE i.carrera.nombre = :carrera)"
 )
 
-@NamedQuery(name = Alumno.LISTARALUMNOS, query = "SELECT a FROM Alumno a")
+@NamedQuery(name = Alumno.LISTARALUMNOS, query = "SELECT a FROM Alumno a ORDER BY a.apellido")
 public class Alumno {
     public static final String LISTARALUMNOS = "Alumno.ListarAlumnos";
     public static final String ALUMNOSSORTNROLIB = "Alumno.Alumnossortnrolib";
@@ -63,5 +64,14 @@ public class Alumno {
         this.edad = edad;
         this.genero = genero;
         this.ciudad_residencia = ciudad_residencia;
+    }
+
+    public Alumno(AlumnoDTO alumnoDTO) {
+        this.nro_libreta = alumnoDTO.getNro_libreta();
+        this.nombre = alumnoDTO.getNombre();
+        this.apellido = alumnoDTO.getApellido();
+        this.edad = alumnoDTO.getEdad();
+        this.genero = alumnoDTO.getGenero();
+        this.ciudad_residencia = alumnoDTO.getCiudad_residencia();
     }
 }

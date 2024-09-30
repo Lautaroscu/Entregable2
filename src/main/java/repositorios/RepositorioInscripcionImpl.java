@@ -45,7 +45,7 @@ public class RepositorioInscripcionImpl extends BaseRepository implements Reposi
 
     @Override
     public void matricularAlumnoCarrera(Alumno alumno, Carrera carrera) {
-        Inscripcion inscripcion = new Inscripcion(alumno, carrera, LocalDate.now());
+        Inscripcion inscripcion = new Inscripcion(alumno, carrera);
         em.persist(inscripcion);
     }
 

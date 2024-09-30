@@ -1,5 +1,6 @@
 package entities;
 
+import DTOs.CarreraDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,5 +34,10 @@ public class Carrera {
 
     public Carrera(String nombre) {
         this.nombre = nombre;
+    }
+
+    public Carrera (CarreraDTO carreraDTO) {
+        this.id_carrera = carreraDTO.getId_carrera();
+        this.nombre = carreraDTO.getNombre();
     }
 }
