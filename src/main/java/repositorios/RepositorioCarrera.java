@@ -2,7 +2,6 @@ package repositorios;
 
 import DTOs.CarreraReporteDTO;
 import entities.Carrera;
-import jakarta.persistence.EntityManager;
 
 import java.util.List;
 

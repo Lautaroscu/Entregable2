@@ -1,11 +1,11 @@
 package services;
 
 import DTOs.AlumnoDTO;
-import DTOs.AlumnoMapper;
 import entities.Alumno;
 import entities.Carrera;
-import repositorios.RepositorioCarrera;
+import mappers.AlumnoMapper;
 import repositorios.RepositorioAlumno;
+import repositorios.RepositorioCarrera;
 
 import java.util.List;
 
@@ -21,8 +21,8 @@ public class ServicioAlumno {
     }
 
     public void altaAlumno(AlumnoDTO alumno) {
-        Alumno nuevo = new Alumno(alumno.getNombre(), alumno.getApellido(), alumno.getEdad(), alumno.getGenero(), alumno.getCiudad_residencia());
-        repositorioAlumno.altaAlumno(nuevo);
+
+        repositorioAlumno.altaAlumno(alumnoMapper.toEntity(alumno));
     }
 
     public void bajaAlumno(int nroLibreta) {
@@ -38,7 +38,6 @@ public class ServicioAlumno {
         modificado.setCiudad_residencia(alumno.getCiudad_residencia());
 
         repositorioAlumno.modificarAlumno(modificado);
-
     }
 
     public List<AlumnoDTO> listarAlumnos() {

@@ -1,36 +1,48 @@
 package entities;
 
-import lombok.*;
-
+import DTOs.AlumnoDTO;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "alumno")
 @Getter
 @Setter
 @ToString
-@NamedQuery(name = Alumno.ALUMNOSSORTNROLIB , query = "SELECT a FROM Alumno a ORDER BY a.nro_libreta")
+@NamedQuery(
+        name = Alumno.ALUMNOSSORTNROLIB,
+        query = "SELECT a FROM Alumno a ORDER BY a.nro_libreta"
+)
 
-@NamedQuery(name = Alumno.ALUMNOSPORGENERO , query = "SELECT a FROM Alumno a WHERE a.genero = :genero")
+@NamedQuery(
+        name = Alumno.ALUMNOSPORGENERO,
+        query = "SELECT a FROM Alumno a WHERE a.genero = :genero"
+)
 
-@NamedQuery(name = Alumno.ALUMNOCARRERAYCIUDAD , query = "SELECT a FROM Alumno a WHERE a.ciudad_residencia = :ciudad AND a IN (SELECT i.alumno FROM Inscripcion i WHERE i.carrera.nombre = :carrera)")
+@NamedQuery(
+        name = Alumno.ALUMNOCARRERAYCIUDAD,
+        query = "SELECT a " +
+                "FROM Alumno a " +
+                "WHERE a.ciudad_residencia = :ciudad AND a IN " +
+                "(SELECT i.alumno FROM Inscripcion i WHERE i.carrera.nombre = :carrera)"
+)
 
-@NamedQuery(name = Alumno.LISTARALUMNOS , query = "SELECT a FROM Alumno a")
+@NamedQuery(name = Alumno.LISTARALUMNOS, query = "SELECT a FROM Alumno a ORDER BY a.apellido")
 public class Alumno {
-
-    public static final  String LISTARALUMNOS ="Alumno.ListarAlumnos";
+    public static final String LISTARALUMNOS = "Alumno.ListarAlumnos";
     public static final String ALUMNOSSORTNROLIB = "Alumno.Alumnossortnrolib";
     public static final String ALUMNOSPORGENERO = "Alumno.Alumnosporgenero";
     public static final String ALUMNOCARRERAYCIUDAD = "Alumno.Alumnocarryayciudad";
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int nro_libreta;
 
-
     @Column
     private String nombre;
+
     @Column
     private String apellido;
 
@@ -45,6 +57,7 @@ public class Alumno {
 
     public Alumno() {
     }
+
     public Alumno(String nombre, String apellido, int edad, String genero, String ciudad_residencia) {
         this.nombre = nombre;
         this.apellido = apellido;
@@ -53,4 +66,12 @@ public class Alumno {
         this.ciudad_residencia = ciudad_residencia;
     }
 
+    public Alumno(AlumnoDTO alumnoDTO) {
+        this.nro_libreta = alumnoDTO.getNro_libreta();
+        this.nombre = alumnoDTO.getNombre();
+        this.apellido = alumnoDTO.getApellido();
+        this.edad = alumnoDTO.getEdad();
+        this.genero = alumnoDTO.getGenero();
+        this.ciudad_residencia = alumnoDTO.getCiudad_residencia();
+    }
 }

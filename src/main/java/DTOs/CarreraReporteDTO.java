@@ -1,5 +1,14 @@
 package DTOs;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode
 public class CarreraReporteDTO {
     private String nombreCarrera;
     private int anio;
@@ -11,13 +20,5 @@ public class CarreraReporteDTO {
         this.anio = anio;
         this.cantidadInscriptos = cantidadInscriptos;
         this.cantidadEgresados = cantidadEgresados;
-    }
-
-    public String getNombreCarrera() {
-        return nombreCarrera;
-    }
-
-    public void setNombreCarrera(String nombreCarrera) {
-        this.nombreCarrera = nombreCarrera;
     }
 }

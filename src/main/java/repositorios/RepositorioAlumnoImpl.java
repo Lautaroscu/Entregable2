@@ -2,7 +2,6 @@ package repositorios;
 
 import entities.Alumno;
 import entities.Carrera;
-
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 
@@ -16,8 +15,9 @@ public class RepositorioAlumnoImpl extends BaseRepository implements Repositorio
 
     @Override
     public void altaAlumno(Alumno alumno) {
-        if (alumno != null)
+        if (alumno != null) {
             em.persist(alumno);
+        }
     }
 
     @Override

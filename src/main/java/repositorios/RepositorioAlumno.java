@@ -1,14 +1,11 @@
 package repositorios;
 
-import DTOs.AlumnoDTO;
 import entities.Alumno;
 import entities.Carrera;
-import jakarta.persistence.EntityManager;
 
 import java.util.List;
 
 public interface RepositorioAlumno {
-    //crud basico
     void altaAlumno(Alumno alumno);
 
     void bajaAlumno(int nroLibreta);
@@ -24,6 +21,4 @@ public interface RepositorioAlumno {
     List<Alumno> recuperarAlumnosPorGenero(String genero);
 
     List<Alumno> recuperarAlumnosPorCarrerayCiudad(Carrera carrera, String ciudad);
-
-
 }

@@ -3,7 +3,6 @@ package repositorios;
 import entities.Alumno;
 import entities.Carrera;
 import entities.Inscripcion;
-import jakarta.persistence.EntityManager;
 
 import java.util.List;
 
