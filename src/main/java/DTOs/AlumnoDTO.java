@@ -14,7 +14,6 @@ import java.io.Serializable;
 @EqualsAndHashCode
 public class AlumnoDTO  implements Serializable {
     private int nro_libreta;
-
     private String nombre;
 
     private String apellido;
@@ -24,6 +23,7 @@ public class AlumnoDTO  implements Serializable {
     private String genero;
 
     private String ciudad_residencia;
+
 
     public  AlumnoDTO(Alumno a) {
         this.nro_libreta = a.getNro_libreta();

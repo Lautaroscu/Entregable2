@@ -75,4 +75,7 @@ public class ServicioAlumno {
                 .map(alumnoMapper)
                 .toList();
     }
+    public  void clear() {
+        repositorioAlumno.clear();
+    }
 }

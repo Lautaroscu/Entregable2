@@ -25,5 +25,7 @@ public interface RepositorioAlumno {
 
     List<Alumno> recuperarAlumnosPorCarrerayCiudad(Carrera carrera, String ciudad);
 
+    void clear();
+
 
 }

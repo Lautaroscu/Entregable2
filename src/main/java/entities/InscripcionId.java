@@ -1,7 +1,6 @@
 package entities;
 
 import jakarta.persistence.Embeddable;
-import jakarta.persistence.JoinColumn;
 import lombok.Getter;
 import lombok.Setter;
 

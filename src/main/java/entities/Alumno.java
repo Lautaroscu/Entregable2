@@ -16,18 +16,21 @@ import jakarta.persistence.*;
 @NamedQuery(name = Alumno.ALUMNOCARRERAYCIUDAD , query = "SELECT a FROM Alumno a WHERE a.ciudad_residencia = :ciudad AND a IN (SELECT i.alumno FROM Inscripcion i WHERE i.carrera.nombre = :carrera)")
 
 @NamedQuery(name = Alumno.LISTARALUMNOS , query = "SELECT a FROM Alumno a")
+@NamedQuery(name = Alumno.CLEAR , query = "DELETE FROM Alumno")
+
+
 public class Alumno {
 
     public static final  String LISTARALUMNOS ="Alumno.ListarAlumnos";
     public static final String ALUMNOSSORTNROLIB = "Alumno.Alumnossortnrolib";
     public static final String ALUMNOSPORGENERO = "Alumno.Alumnosporgenero";
     public static final String ALUMNOCARRERAYCIUDAD = "Alumno.Alumnocarryayciudad";
+    public static final String CLEAR = "Alumno.Clear";
 
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int nro_libreta;
-
 
     @Column
     private String nombre;
@@ -51,6 +54,7 @@ public class Alumno {
         this.edad = edad;
         this.genero = genero;
         this.ciudad_residencia = ciudad_residencia;
+
     }
 
 }

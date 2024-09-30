@@ -66,4 +66,7 @@ public class RepositorioAlumnoImpl extends BaseRepository implements Repositorio
         q.setParameter("carrera", carrera);
         return q.getResultList();
     }
+    public void clear(){
+        em.createNamedQuery(Alumno.CLEAR).executeUpdate();
+    }
 }

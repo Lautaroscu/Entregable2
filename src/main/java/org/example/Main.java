@@ -38,9 +38,9 @@ public class Main {
 
             //Alumnos
             Alumno a1 = new Alumno("Juan", "Gonzalez", 19, "M", "Tandil");
-            Alumno a2 = new Alumno("Maria", "Fernandez", 22, "F", "Mar del Plata");
+            Alumno a2 = new Alumno( "Maria", "Fernandez", 22, "F", "Mar del Plata");
             Alumno a3 = new Alumno("Carlos", "Martinez", 18, "M", "Azul");
-            Alumno a4 = new Alumno("Ana", "Lopez", 21, "F", "Laprida");
+            Alumno a4 = new Alumno( "Ana", "Lopez", 21, "F", "Laprida");
             Alumno a5 = new Alumno("Pedro", "Perez", 19, "M", "Tandil");
 
             //Carreras
@@ -57,11 +57,11 @@ public class Main {
             AlumnoDTO alumnoDTO4 = alumnoMapper.apply(a4);
             AlumnoDTO alumnoDTO5 = alumnoMapper.apply(a5);
 
-            servicioAlumnos.altaAlumno(alumnoDTO1);
-            servicioAlumnos.altaAlumno(alumnoDTO2);
-            servicioAlumnos.altaAlumno(alumnoDTO3);
-            servicioAlumnos.altaAlumno(alumnoDTO4);
-            servicioAlumnos.altaAlumno(alumnoDTO5);
+//            servicioAlumnos.altaAlumno(alumnoDTO1);
+//            servicioAlumnos.altaAlumno(alumnoDTO2);
+//            servicioAlumnos.altaAlumno(alumnoDTO3);
+//            servicioAlumnos.altaAlumno(alumnoDTO4);
+//            servicioAlumnos.altaAlumno(alumnoDTO5);
 
             List<AlumnoDTO> alumnosFromDB = servicioAlumnos.listarAlumnos();
             for(AlumnoDTO alumnoFromDb : alumnosFromDB){
