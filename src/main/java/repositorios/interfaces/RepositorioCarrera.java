@@ -1,8 +1,8 @@
-package repositorios;
+package repositorios.interfaces;
 
-import DTOs.CarreraReporteDTO;
+import DTOs.carrera.CantInscriptosCarreraDTO;
+import DTOs.carrera.CarreraReporteDTO;
 import entities.Carrera;
-import jakarta.persistence.EntityManager;
 
 import java.util.List;
 
@@ -16,4 +16,7 @@ public interface RepositorioCarrera {
     public void modificarCarrera(Carrera carrera);
 
     public List<CarreraReporteDTO> obtenerReporteInscriptosEgresados();
+
+    List<CantInscriptosCarreraDTO> recuperarCarrerasSortByCantInscp();
+
 }

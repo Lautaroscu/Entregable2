@@ -1,4 +1,4 @@
-package DTOs;
+package DTOs.inscripcion;
 
 import entities.Inscripcion;
 

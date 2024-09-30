@@ -1,5 +1,12 @@
-package DTOs;
+package DTOs.carrera;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@ToString
+@Getter
+@Setter
 public class CarreraReporteDTO {
     private String nombreCarrera;
     private int anio;

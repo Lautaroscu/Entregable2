@@ -1,11 +1,11 @@
 package services;
 
-import DTOs.AlumnoDTO;
-import DTOs.AlumnoMapper;
+import DTOs.alumno.AlumnoDTO;
+import DTOs.alumno.AlumnoMapper;
 import entities.Alumno;
 import entities.Carrera;
-import repositorios.RepositorioCarrera;
-import repositorios.RepositorioAlumno;
+import repositorios.interfaces.RepositorioCarrera;
+import repositorios.interfaces.RepositorioAlumno;
 
 import java.util.List;
 
@@ -20,10 +20,12 @@ public class ServicioAlumno {
         this.repositorioCarrera = repositorioCarrera;
     }
 
-    public void altaAlumno(AlumnoDTO alumno) {
+    public void altaAlumno(Alumno alumno) {
         Alumno nuevo = new Alumno(alumno.getNombre(), alumno.getApellido(), alumno.getEdad(), alumno.getGenero(), alumno.getCiudad_residencia());
         repositorioAlumno.altaAlumno(nuevo);
+        alumno.setNro_libreta(nuevo.getNro_libreta());
     }
+
 
     public void bajaAlumno(int nroLibreta) {
         repositorioAlumno.bajaAlumno(nroLibreta);
@@ -55,9 +57,9 @@ public class ServicioAlumno {
                 .toList();
     }
 
-    public List<AlumnoDTO> listarAlumnosOrdenadosPorLibretaASC() {
+    public List<AlumnoDTO> listarAlumnosOrdenadosByApellido() {
         return repositorioAlumno
-                .recuperarAlumnosSortByNroLib()
+                .recuperarAlumnosSortByApellido()
                 .stream()
                 .map(alumnoMapper)
                 .toList();
@@ -68,14 +70,10 @@ public class ServicioAlumno {
         return new AlumnoDTO(al);
     }
 
-    public List<AlumnoDTO> listarAlumnos(int idCarrera, String ciudad) {
-        Carrera carrera = repositorioCarrera.recuperarCarrera(idCarrera);
-        return repositorioAlumno.recuperarAlumnosPorCarrerayCiudad(carrera, ciudad)
+    public List<AlumnoDTO> listarAlumnos(String nombreCarrera, String ciudad) {
+        return repositorioAlumno.recuperarAlumnosPorCarrerayCiudad(nombreCarrera, ciudad)
                 .stream()
                 .map(alumnoMapper)
                 .toList();
-    }
-    public  void clear() {
-        repositorioAlumno.clear();
     }
 }

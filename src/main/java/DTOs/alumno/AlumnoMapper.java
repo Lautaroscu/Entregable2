@@ -1,4 +1,4 @@
-package DTOs;
+package DTOs.alumno;
 
 import entities.Alumno;
 

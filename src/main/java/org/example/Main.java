@@ -1,18 +1,25 @@
 package org.example;
 
-import DTOs.AlumnoDTO;
-import DTOs.AlumnoMapper;
-import entities.*;
+import DTOs.alumno.AlumnoDTO;
+import DTOs.carrera.CantInscriptosCarreraDTO;
+import DTOs.carrera.CarreraDTO;
+import DTOs.carrera.CarreraReporteDTO;
+import DTOs.inscripcion.InscripcionDTO;
+import entities.Alumno;
+import entities.Carrera;
+import entities.Inscripcion;
+import entities.InscripcionId;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-import repositorios.*;
+import repositorios.FactoryRepositorios;
+import repositorios.implementaciones.RepositorioAlumnoImpl;
+import repositorios.implementaciones.RepositorioCarreraImpl;
+import repositorios.implementaciones.RepositorioInscripcionImpl;
 import services.ServicioAlumno;
 import services.ServicioCarrera;
 import services.ServicioInscripcion;
 
-
-import java.time.LocalDate;
 import java.util.List;
 
 public class Main {
@@ -23,9 +30,7 @@ public class Main {
         try {
             emf = Persistence.createEntityManagerFactory("TP");
             em = emf.createEntityManager();
-            em.getTransaction().begin();
 
-            // Setup
             // Instancias singleton repositorios
             RepositorioAlumnoImpl repoAlumnos = FactoryRepositorios.getRepositorioAlumno(em);
             RepositorioInscripcionImpl repoInscripciones = FactoryRepositorios.getRepositorioInscripcion(em);
@@ -36,39 +41,80 @@ public class Main {
             ServicioCarrera servicioCarrera = new ServicioCarrera(repoCarreras);
             ServicioInscripcion servicioInscripcion = new ServicioInscripcion(repoInscripciones);
 
-            //Alumnos
-            Alumno a1 = new Alumno("Juan", "Gonzalez", 19, "M", "Tandil");
-            Alumno a2 = new Alumno( "Maria", "Fernandez", 22, "F", "Mar del Plata");
-            Alumno a3 = new Alumno("Carlos", "Martinez", 18, "M", "Azul");
-            Alumno a4 = new Alumno( "Ana", "Lopez", 21, "F", "Laprida");
-            Alumno a5 = new Alumno("Pedro", "Perez", 19, "M", "Tandil");
+            //2)
+            // A)
+            System.out.println("Alta de un estudiante..");
+            Alumno alumnoNuevo = new Alumno("Lautaro" , "Scuffi" , 20 , "Masculino" , "Juarez");
+            Alumno alumnoNuevo1 = new Alumno("Agustin" , "Alvarez" , 20 , "Masculino" , "Tandil");
+            Alumno alumnoNuevo2= new Alumno("Pepe" , "Carrizo" , 20 , "Masculino" , "Tandil");
+            Alumno alumnoNuevo3 = new Alumno("Micaela" , "Rodriguez" , 22 , "Femenino" , "Tandil");
 
-            //Carreras
-            Carrera c1 = new Carrera("Ingenieria en Sistemas");
-            Carrera c2 = new Carrera("Licenciatura en Gestion Ambiental");
-            Carrera c3 = new Carrera("TUDAI");
-            Carrera c4 = new Carrera("Licenciatura en Fisica");
-            Carrera c5 = new Carrera("Profesorado de Informatica");
+            servicioAlumnos.altaAlumno(alumnoNuevo);
+            servicioAlumnos.altaAlumno(alumnoNuevo1);
+            servicioAlumnos.altaAlumno(alumnoNuevo2);
+            servicioAlumnos.altaAlumno(alumnoNuevo3);
+            //checkeo de que se inserto el dato
+            AlumnoDTO alumnoRecuperado = servicioAlumnos.recuperarAlumnoPorNroLib(alumnoNuevo.getNro_libreta());
+            System.out.println(alumnoRecuperado);
+            //B)
+            System.out.println("Matricular estudiante a una carrera");
+            Carrera tudai = new Carrera("tudai");
+            Carrera sistemas = new Carrera("ing sistemas");
+            Carrera licAmbiental = new Carrera("lic ambiental");
 
-            AlumnoMapper alumnoMapper = new AlumnoMapper();
-            AlumnoDTO alumnoDTO1 = alumnoMapper.apply(a1);
-            AlumnoDTO alumnoDTO2 = alumnoMapper.apply(a2);
-            AlumnoDTO alumnoDTO3 = alumnoMapper.apply(a3);
-            AlumnoDTO alumnoDTO4 = alumnoMapper.apply(a4);
-            AlumnoDTO alumnoDTO5 = alumnoMapper.apply(a5);
+            servicioCarrera.adicionarCarrera(tudai);
+            servicioCarrera.adicionarCarrera(sistemas);
+            servicioCarrera.adicionarCarrera(licAmbiental);
 
-//            servicioAlumnos.altaAlumno(alumnoDTO1);
-//            servicioAlumnos.altaAlumno(alumnoDTO2);
-//            servicioAlumnos.altaAlumno(alumnoDTO3);
-//            servicioAlumnos.altaAlumno(alumnoDTO4);
-//            servicioAlumnos.altaAlumno(alumnoDTO5);
+            servicioInscripcion.matricularAlumnoCarrera(alumnoNuevo , tudai);
+            InscripcionId idInsc = new InscripcionId(tudai.getId_carrera() , alumnoRecuperado.getNro_libreta());
 
-            List<AlumnoDTO> alumnosFromDB = servicioAlumnos.listarAlumnos();
-            for(AlumnoDTO alumnoFromDb : alumnosFromDB){
-                System.out.println(alumnoFromDb.getNombre());
-            }
+            InscripcionDTO inscripcionRecuperada = servicioInscripcion.obtenerInscripcion(idInsc);
+            System.out.println("Inscripcion recuperada");
+            System.out.println(inscripcionRecuperada);
 
-            em.getTransaction().commit();
+            //C)
+            System.out.println("Alumnos ordenados por Apellido ASC");
+            System.out.println(servicioAlumnos.listarAlumnosOrdenadosByApellido());
+
+            //D)
+             AlumnoDTO alumnoDTOByNroLibreta = servicioAlumnos.recuperarAlumnoPorNroLib(1);
+             System.out.println("Alumno Recuperado por numero de libreta : " + alumnoDTOByNroLibreta);
+
+             //E)
+            System.out.println("Alumnos dado un genero :");
+            List<AlumnoDTO> alumnosByGenero = servicioAlumnos.listarAlumnosPorGenero("Femenino");
+
+            System.out.println(alumnosByGenero);
+//TODO LATER :
+//            //F)
+//            servicioInscripcion.matricularAlumnoCarrera(alumnoNuevo1 , tudai);
+//            servicioInscripcion.matricularAlumnoCarrera(alumnoNuevo1 , sistemas);
+//
+//            servicioInscripcion.matricularAlumnoCarrera(alumnoNuevo2 , tudai);
+//            servicioInscripcion.matricularAlumnoCarrera(alumnoNuevo2 , sistemas);
+//            servicioInscripcion.matricularAlumnoCarrera(alumnoNuevo2 , licAmbiental);
+//            List<CantInscriptosCarreraDTO> f = servicioCarrera.obtenerCarrerasPorCantInscriptos();
+//
+//            System.out.println(f);
+
+            //G)
+            System.out.println("Alumnos de una carrera que residen en una ciudad en especifica");
+            List<AlumnoDTO> alumnosByCiudadyCarrera = servicioAlumnos.listarAlumnos("tudai", "Juarez");
+            System.out.println(alumnosByCiudadyCarrera);
+
+
+            System.out.println(" ");
+            System.out.println(" ");
+
+            //3)
+            System.out.println("Reporte inscriptos y egresados por carrera");
+            System.out.println("<------------------------------------------------>");
+            List<CarreraReporteDTO> carreraReporteDTO = servicioCarrera.generarReporteInscriptosEgresados();
+
+                System.out.println(carreraReporteDTO);
+
+
         } catch (Exception e) {
             if (em != null && em.getTransaction().isActive()) {
                 em.getTransaction().rollback();

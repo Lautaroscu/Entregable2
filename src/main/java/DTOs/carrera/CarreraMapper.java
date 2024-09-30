@@ -1,4 +1,4 @@
-package DTOs;
+package DTOs.carrera;
 
 import entities.Carrera;
 

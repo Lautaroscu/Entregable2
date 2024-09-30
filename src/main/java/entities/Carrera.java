@@ -12,9 +12,11 @@ import jakarta.persistence.*;
 @ToString
 @AllArgsConstructor
 @Table(name = "carrera")
+@NamedQuery(name = Carrera.CARRERASSORTCANTINSC , query = "SELECT  i.carrera , count(i) as cant_inscriptos FROM Inscripcion i GROUP BY  i.carrera " +
+        "ORDER BY cant_inscriptos")
 @NamedQuery(
         name = "Carrera.ReporteInscriptosEgresados",
-        query = "SELECT new DTOs.CarreraReporteDTO(c.nombre, YEAR(i.fechaInscripcion), " +
+        query = "SELECT new DTOs.carrera.CarreraReporteDTO(c.nombre, YEAR(i.fechaInscripcion), " +
                 "COUNT(i), " +
                 "SUM(CASE WHEN i.seGraduo = TRUE THEN 1 ELSE 0 END)) " +
                 "FROM Inscripcion i " +
@@ -23,6 +25,8 @@ import jakarta.persistence.*;
                 "ORDER BY c.nombre, YEAR(i.fechaInscripcion)"
 )
 public class Carrera {
+    public final static String CARRERASSORTCANTINSC = "Carrera.CarrerasSortCantInsc";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_carrera;

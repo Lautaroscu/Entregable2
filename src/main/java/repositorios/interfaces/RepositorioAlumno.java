@@ -1,9 +1,7 @@
-package repositorios;
+package repositorios.interfaces;
 
-import DTOs.AlumnoDTO;
 import entities.Alumno;
 import entities.Carrera;
-import jakarta.persistence.EntityManager;
 
 import java.util.List;
 
@@ -17,13 +15,14 @@ public interface RepositorioAlumno {
 
     List<Alumno> listarAlumnos();
 
-    List<Alumno> recuperarAlumnosSortByNroLib();
+    List<Alumno> recuperarAlumnosSortByApellido();
 
     Alumno recuperarAlumnoPorNroLib(int nroLib);
 
     List<Alumno> recuperarAlumnosPorGenero(String genero);
 
-    List<Alumno> recuperarAlumnosPorCarrerayCiudad(Carrera carrera, String ciudad);
+    List<Alumno> recuperarAlumnosPorCarrerayCiudad(String carrera, String ciudad);
+
 
 
 

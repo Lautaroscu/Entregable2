@@ -3,6 +3,8 @@ package entities;
 import lombok.Getter;
 import lombok.Setter;
 import jakarta.persistence.*;
+import lombok.ToString;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
@@ -12,10 +14,9 @@ import java.time.Period;
 @Setter
 @Table(name = "inscripcion")
 @IdClass(InscripcionId.class)
-@NamedQuery(name = Inscripcion.CARRERASSORTCANTINSC , query = "SELECT i.carrera , count(i) as cant_inscriptos FROM Inscripcion i GROUP BY i.carrera.nombre " +
-        "ORDER BY cant_inscriptos")
+@ToString
+
 public class Inscripcion implements Serializable {
-    public final static String CARRERASSORTCANTINSC = "Inscripcion.CarrerasSortCantInsc";
 
     @Id
     @Column(name = "id_carrera")
@@ -50,6 +51,8 @@ public class Inscripcion implements Serializable {
         this.nroLibreta = alumno.getNro_libreta(); // Suponiendo que `nro_libreta` es la PK de Alumno
         this.idCarrera = carrera.getId_carrera(); // Suponiendo que `id_carrera` es la PK de Carrera
         this.fechaInscripcion = fechaInscripcion;
+        this.alumno = alumno;
+        this.carrera = carrera;
         this.seGraduo = false;
     }
 }

@@ -1,4 +1,4 @@
-package DTOs;
+package DTOs.alumno;
 
 
 import entities.Alumno;
@@ -25,14 +25,22 @@ public class AlumnoDTO  implements Serializable {
     private String ciudad_residencia;
 
 
-    public  AlumnoDTO(Alumno a) {
-        this.nro_libreta = a.getNro_libreta();
+    public AlumnoDTO(Alumno a) {
         this.nombre = a.getNombre();
         this.apellido = a.getApellido();
         this.edad = a.getEdad();
         this.genero = a.getGenero();
         this.ciudad_residencia = a.getCiudad_residencia();
+        this.nro_libreta = a.getNro_libreta();
 
+    }
+    public AlumnoDTO(String nombre, String apellido, int edad, String genero , String ciudad_residencia) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.edad = edad;
+        this.genero = genero;
+        this.ciudad_residencia = ciudad_residencia;
+        this.nro_libreta = 0;
     }
 
 

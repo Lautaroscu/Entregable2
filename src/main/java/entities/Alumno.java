@@ -15,8 +15,9 @@ import jakarta.persistence.*;
 
 @NamedQuery(name = Alumno.ALUMNOCARRERAYCIUDAD , query = "SELECT a FROM Alumno a WHERE a.ciudad_residencia = :ciudad AND a IN (SELECT i.alumno FROM Inscripcion i WHERE i.carrera.nombre = :carrera)")
 
-@NamedQuery(name = Alumno.LISTARALUMNOS , query = "SELECT a FROM Alumno a")
-@NamedQuery(name = Alumno.CLEAR , query = "DELETE FROM Alumno")
+@NamedQuery(name = Alumno.LISTARALUMNOSSORTAPELLIDO , query = "SELECT a FROM Alumno a ORDER BY a.apellido")
+
+//@NamedQuery(name = Alumno.LISTARALUMNOS , query = "SELECT a FROM Alumno a ORDER BY a.apellido")
 
 
 public class Alumno {
@@ -25,7 +26,8 @@ public class Alumno {
     public static final String ALUMNOSSORTNROLIB = "Alumno.Alumnossortnrolib";
     public static final String ALUMNOSPORGENERO = "Alumno.Alumnosporgenero";
     public static final String ALUMNOCARRERAYCIUDAD = "Alumno.Alumnocarryayciudad";
-    public static final String CLEAR = "Alumno.Clear";
+    public  static final String LISTARALUMNOSSORTAPELLIDO = "Alumno.Listaralumnossortapellido";
+
 
 
     @Id

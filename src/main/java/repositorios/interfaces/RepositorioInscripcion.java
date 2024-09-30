@@ -1,22 +1,19 @@
-package repositorios;
+package repositorios.interfaces;
 
 import entities.Alumno;
 import entities.Carrera;
 import entities.Inscripcion;
-import jakarta.persistence.EntityManager;
+import entities.InscripcionId;
 
 import java.util.List;
 
 public interface RepositorioInscripcion {
-    Inscripcion obtenerInscripcion(int id);
-
-    void agregarInscripcion(Inscripcion inscripcion);
+    Inscripcion obtenerInscripcion(InscripcionId id);
 
     void modificarInscripcion(Inscripcion inscripcion);
 
-    void eliminarInscripcion(int id);
+    void eliminarInscripcion(InscripcionId id);
 
     void matricularAlumnoCarrera(Alumno alumno, Carrera carrera);
 
-    List<Carrera> recuperarCarrerasSortByCantInscp();
 }
