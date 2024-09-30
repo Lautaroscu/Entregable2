@@ -1,15 +1,9 @@
 #TODO : 
 
-##HACER MAPPER DE INSCRIPCION Y CARRREA 
+* La base de datos ya tiene los registros, tiene 15 alumnos con nro libreta entre 1 y 15, y 5 carreras con id de 1 a 5. Las inscripciones tambien fueron agregadas a la bbdd
 
-##HACER IMPL DE LOS REPOS INSCRIPCION Y CARRERA Y SUS SERVICIOS
+* Faltaria poner en el main cada ejercicio y su respectiva consulta, por ej:
+//2)c)
+Consulta 
+System.out(imprimirConsulta)
 
-##HACER FACTORY DE BASES DE DATOS O UTILIZAR SOLO DERBY.
-
-#Realizar punto nro3 y el diagrama de objetos.
-
-(esto ya es mas mio :
-no se si esta bien que en el main se abra opere , comitee,
-y cierre el manager. Por el momento lo dejo asi, en caso que se deba hacer
-por cada operacion, lo corrijo.
-)
