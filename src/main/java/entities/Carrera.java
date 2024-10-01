@@ -1,19 +1,22 @@
 package entities;
 
-import DTOs.CarreraDTO;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
+
+import jakarta.persistence.*;
 
 @Entity
 @Getter
 @ToString
 @AllArgsConstructor
 @Table(name = "carrera")
+@NamedQuery(name = Carrera.CARRERASSORTCANTINSC , query = "SELECT  i.carrera , count(i) as cant_inscriptos FROM Inscripcion i GROUP BY  i.carrera " +
+        "ORDER BY cant_inscriptos")
 @NamedQuery(
         name = "Carrera.ReporteInscriptosEgresados",
-        query = "SELECT new DTOs.CarreraReporteDTO(c.nombre, YEAR(i.fechaInscripcion), " +
+        query = "SELECT new DTOs.carrera.CarreraReporteDTO(c.nombre, YEAR(i.fechaInscripcion), " +
                 "COUNT(i), " +
                 "SUM(CASE WHEN i.seGraduo = TRUE THEN 1 ELSE 0 END)) " +
                 "FROM Inscripcion i " +
@@ -22,6 +25,8 @@ import lombok.ToString;
                 "ORDER BY c.nombre, YEAR(i.fechaInscripcion)"
 )
 public class Carrera {
+    public final static String CARRERASSORTCANTINSC = "Carrera.CarrerasSortCantInsc";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_carrera;
@@ -34,10 +39,5 @@ public class Carrera {
 
     public Carrera(String nombre) {
         this.nombre = nombre;
-    }
-
-    public Carrera (CarreraDTO carreraDTO) {
-        this.id_carrera = carreraDTO.getId_carrera();
-        this.nombre = carreraDTO.getNombre();
     }
 }

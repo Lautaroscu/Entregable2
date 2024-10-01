@@ -1,16 +1,19 @@
 package services;
 
-import DTOs.CarreraDTO;
-import DTOs.CarreraReporteDTO;
+import DTOs.carrera.CantInscriptosCarreraDTO;
+import DTOs.carrera.CarreraDTO;
+import DTOs.carrera.CarreraMapper;
+import DTOs.carrera.CarreraReporteDTO;
 import entities.Carrera;
-import mappers.CarreraMapper;
-import repositorios.RepositorioCarrera;
+import repositorios.interfaces.RepositorioCarrera;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ServicioCarrera {
 
     private CarreraMapper carreraMapper;
+    private CantInscriptosCarreraDTO cantInscriptosCarreraDTO;
     private RepositorioCarrera repositorioCarrera;
 
     public ServicioCarrera(RepositorioCarrera repositorioCarrera) {
@@ -24,9 +27,8 @@ public class ServicioCarrera {
         return carreraDTO;
     }
 
-    public void adicionarCarrera(CarreraDTO carrera) {
-        Carrera c = transformarDtoAEntidad(carrera);
-        repositorioCarrera.adicionarCarrera(c);
+    public void adicionarCarrera(Carrera carrera) {
+        repositorioCarrera.adicionarCarrera(carrera);
     }
 
     public void removerCarrera(int id) {
@@ -46,4 +48,9 @@ public class ServicioCarrera {
         Carrera c = new Carrera(carreraDTO.getId_carrera(), carreraDTO.getNombre());
         return c;
     }
+    public List<CantInscriptosCarreraDTO> obtenerCarrerasPorCantInscriptos() {
+      return repositorioCarrera.recuperarCarrerasSortByCantInscp();
+
+    }
+
 }
