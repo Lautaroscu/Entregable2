@@ -19,12 +19,4 @@ public class CarreraReporteDTO {
         this.cantidadInscriptos = cantidadInscriptos;
         this.cantidadEgresados = cantidadEgresados;
     }
-
-    public String getNombreCarrera() {
-        return nombreCarrera;
-    }
-
-    public void setNombreCarrera(String nombreCarrera) {
-        this.nombreCarrera = nombreCarrera;
-    }
 }

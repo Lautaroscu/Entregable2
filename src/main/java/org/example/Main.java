@@ -1,13 +1,10 @@
 package org.example;
 
 import DTOs.alumno.AlumnoDTO;
-import DTOs.carrera.CantInscriptosCarreraDTO;
-import DTOs.carrera.CarreraDTO;
 import DTOs.carrera.CarreraReporteDTO;
 import DTOs.inscripcion.InscripcionDTO;
 import entities.Alumno;
 import entities.Carrera;
-import entities.Inscripcion;
 import entities.InscripcionId;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -44,18 +41,22 @@ public class Main {
             //2)
             // A)
             System.out.println("Alta de un estudiante..");
-            Alumno alumnoNuevo = new Alumno("Lautaro" , "Scuffi" , 20 , "Masculino" , "Juarez");
-            Alumno alumnoNuevo1 = new Alumno("Agustin" , "Alvarez" , 20 , "Masculino" , "Tandil");
-            Alumno alumnoNuevo2= new Alumno("Pepe" , "Carrizo" , 20 , "Masculino" , "Tandil");
-            Alumno alumnoNuevo3 = new Alumno("Micaela" , "Rodriguez" , 22 , "Femenino" , "Tandil");
+            Alumno alumnoNuevo = new Alumno("Lautaro", "Scuffi", 20, "Masculino", "Juarez");
+            Alumno alumnoNuevo1 = new Alumno("Agustin", "Alvarez", 20, "Masculino", "Tandil");
+            Alumno alumnoNuevo2 = new Alumno("Pepe", "Carrizo", 20, "Masculino", "Tandil");
+            Alumno alumnoNuevo3 = new Alumno("Micaela", "Rodriguez", 22, "Femenino", "Tandil");
 
             servicioAlumnos.altaAlumno(alumnoNuevo);
             servicioAlumnos.altaAlumno(alumnoNuevo1);
             servicioAlumnos.altaAlumno(alumnoNuevo2);
             servicioAlumnos.altaAlumno(alumnoNuevo3);
-            //checkeo de que se inserto el dato
+            //Chequeo de que se inserto el dato
             AlumnoDTO alumnoRecuperado = servicioAlumnos.recuperarAlumnoPorNroLib(alumnoNuevo.getNro_libreta());
-            System.out.println(alumnoRecuperado);
+            System.out.println("Alumno insertado:");
+            System.out.println(alumnoRecuperado.getNro_libreta() + ": " + alumnoRecuperado.getApellido() + ", " + alumnoRecuperado.getNombre());
+
+            System.out.println(" ");
+
             //B)
             System.out.println("Matricular estudiante a una carrera");
             Carrera tudai = new Carrera("tudai");
@@ -66,26 +67,42 @@ public class Main {
             servicioCarrera.adicionarCarrera(sistemas);
             servicioCarrera.adicionarCarrera(licAmbiental);
 
-            servicioInscripcion.matricularAlumnoCarrera(alumnoNuevo , tudai);
-            InscripcionId idInsc = new InscripcionId(tudai.getId_carrera() , alumnoRecuperado.getNro_libreta());
+            servicioInscripcion.matricularAlumnoCarrera(alumnoNuevo, tudai);
+            InscripcionId idInsc = new InscripcionId(tudai.getId_carrera(), alumnoRecuperado.getNro_libreta());
 
             InscripcionDTO inscripcionRecuperada = servicioInscripcion.obtenerInscripcion(idInsc);
-            System.out.println("Inscripcion recuperada");
+            System.out.println("Inscripcion insertada:");
             System.out.println(inscripcionRecuperada);
 
+            System.out.println(" ");
+
             //C)
-            System.out.println("Alumnos ordenados por Apellido ASC");
-            System.out.println(servicioAlumnos.listarAlumnosOrdenadosByApellido());
+            System.out.println("Alumnos ordenados por Apellido");
+            List<AlumnoDTO> alumnosOrdenados = servicioAlumnos.listarAlumnosOrdenadosByApellido();
+            for (AlumnoDTO alumno : alumnosOrdenados) {
+                System.out.println(alumno.getApellido() + ", " + alumno.getNombre());
+            }
+
+            System.out.println(" ");
 
             //D)
-             AlumnoDTO alumnoDTOByNroLibreta = servicioAlumnos.recuperarAlumnoPorNroLib(1);
-             System.out.println("Alumno Recuperado por numero de libreta : " + alumnoDTOByNroLibreta);
+            AlumnoDTO alumnoDTOByNroLibreta = servicioAlumnos.recuperarAlumnoPorNroLib(1);
+            System.out.println("Alumno Recuperado por numero de libreta : ");
+            System.out.println("Nro libreta: "+alumnoDTOByNroLibreta.getNro_libreta() + ": "
+                    + alumnoDTOByNroLibreta.getApellido() + ", " +
+                    alumnoDTOByNroLibreta.getNombre() + " - Edad: " + alumnoDTOByNroLibreta.getEdad())
+            ;
 
-             //E)
-            System.out.println("Alumnos dado un genero :");
+            System.out.println(" ");
+
+            //E)
+            System.out.println("Alumnos dado un genero. Ej: Femenino");
             List<AlumnoDTO> alumnosByGenero = servicioAlumnos.listarAlumnosPorGenero("Femenino");
+            for (AlumnoDTO alumno : alumnosByGenero) {
+                System.out.println(alumno.getApellido() + ", " + alumno.getNombre() + " - genero: " + alumno.getGenero());
+            }
 
-            System.out.println(alumnosByGenero);
+            System.out.println(" ");
 //TODO LATER :
 //            //F)
 //            servicioInscripcion.matricularAlumnoCarrera(alumnoNuevo1 , tudai);
@@ -98,23 +115,30 @@ public class Main {
 //
 //            System.out.println(f);
 
-            //G)
-            System.out.println("Alumnos de una carrera que residen en una ciudad en especifica");
-            List<AlumnoDTO> alumnosByCiudadyCarrera = servicioAlumnos.listarAlumnos("tudai", "Juarez");
-            System.out.println(alumnosByCiudadyCarrera);
-
-
             System.out.println(" ");
+            //G)
+            System.out.println("Alumnos de una carrera que residen en una ciudad en especifico. Ej: Juarez");
+            List<AlumnoDTO> alumnosByCiudadyCarrera = servicioAlumnos.listarAlumnos("tudai", "Juarez");
+            for (AlumnoDTO alumno : alumnosByGenero) {
+                System.out.println(alumno.getApellido() + ", " + alumno.getNombre() + " - ciudad: " + alumno.getCiudad_residencia());
+            }
+
             System.out.println(" ");
 
             //3)
             System.out.println("Reporte inscriptos y egresados por carrera");
-            System.out.println("<------------------------------------------------>");
             List<CarreraReporteDTO> carreraReporteDTO = servicioCarrera.generarReporteInscriptosEgresados();
 
-                System.out.println(carreraReporteDTO);
+            System.out.printf("%-30s %-10s %-20s %-20s%n", "Carrera", "Año", "Cantidad Inscriptos", "Cantidad Egresados");
+            System.out.println("=".repeat(85));
 
-
+            for (CarreraReporteDTO dto : carreraReporteDTO) {
+                System.out.printf("%-30s %-10d %-20d %-20d%n",
+                        dto.getNombreCarrera(),
+                        dto.getAnio(),
+                        dto.getCantidadInscriptos(),
+                        dto.getCantidadEgresados());
+            }
         } catch (Exception e) {
             if (em != null && em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
